@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: 6b27d8cd4bc08164fbdbbe9c86b6e1a8
+timeCreated: 1470365482
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: NormalSolderSitDownFireinthehole_0
+    21300002: NormalSolderSitDownFireinthehole_1
+    21300004: NormalSolderSitDownFireinthehole_2
+    21300006: NormalSolderSitDownFireinthehole_3
+    21300008: NormalSolderSitDownFireinthehole_4
+    21300010: NormalSolderSitDownFireinthehole_5
+    21300012: NormalSolderSitDownFireinthehole_6
+    21300014: NormalSolderSitDownFireinthehole_7
+    21300016: NormalSolderSitDownFireinthehole_8
+    21300018: NormalSolderSitDownFireinthehole_9
+    21300020: NormalSolderSitDownFireinthehole_10
+    21300022: NormalSolderSitDownFireinthehole_11
+    21300024: NormalSolderSitDownFireinthehole_12
+    21300026: NormalSolderSitDownFireinthehole_13
+    21300028: NormalSolderSitDownFireinthehole_14
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 5
+        width: 42
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_1
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 4
+        width: 42
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 5
+        width: 41
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_3
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 4
+        width: 41
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_4
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 3
+        width: 41
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_5
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 4
+        width: 41
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_6
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 3
+        width: 41
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_7
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 2
+        width: 41
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_8
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 2
+        width: 41
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_9
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 1
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_10
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 1
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_11
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 24
+        width: 39
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4
+        width: 43
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_13
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1
+        width: 42
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderSitDownFireinthehole_14
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 1
+        width: 42
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Enemy\Enemy AI\NormalSolder.cs">
+    <Files>
+      <File FileName="Assets\Enemy\Enemy AI\NormalSolder.cs" Line="132" Column="2" />
+      <File FileName="Assets\Enemy\Enemy AI\MonsterSetting.cs" Line="21" Column="27" />
+      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\HaveLifeBullet.cs" Line="26" Column="3" />
+      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\UnHaveLifeBullet.cs" Line="42" Column="5" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

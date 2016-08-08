@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{5F67CEE0-E098-6340-569E-E829E04DD391}") = "Metal Slug Test", "Assembly-CSharp.csproj", "{43EB152D-CA38-5361-C74D-601BF39C85FE}"
+EndProject
+Project("{5F67CEE0-E098-6340-569E-E829E04DD391}") = "Metal Slug Test", "Assembly-CSharp-Editor.csproj", "{18F4D81D-A71D-E101-7D6B-8D14E2D314E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43EB152D-CA38-5361-C74D-601BF39C85FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43EB152D-CA38-5361-C74D-601BF39C85FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43EB152D-CA38-5361-C74D-601BF39C85FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43EB152D-CA38-5361-C74D-601BF39C85FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F4D81D-A71D-E101-7D6B-8D14E2D314E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F4D81D-A71D-E101-7D6B-8D14E2D314E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F4D81D-A71D-E101-7D6B-8D14E2D314E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F4D81D-A71D-E101-7D6B-8D14E2D314E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
