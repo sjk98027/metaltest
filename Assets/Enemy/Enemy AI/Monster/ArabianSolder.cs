@@ -102,6 +102,7 @@ public class ArabianSolder : MonsterSetting {
 
 		if (attacktype == 1) {
 			Instantiate (unHavelifeBullet.bullet, this.transform.position, transform.rotation);
+			//Vector2 bulletVector2 = new Vector2 (-1, 0);
 			//Instantiate (UnHaveLifeBullet, this.transform.position, this.transform.rotation);
 		} 
 

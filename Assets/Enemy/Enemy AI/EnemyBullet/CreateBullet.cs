@@ -5,6 +5,7 @@ public class CreateBullet : MonoBehaviour {
 	public bool haveLife;
 	public float moveSpeed;
 	public int damage;
+	public SpriteRenderer sR;
 
 	public bool HaveLife
 	{
@@ -18,5 +19,8 @@ public class CreateBullet : MonoBehaviour {
 	public int Damage{
 		get { return damage;}
 	}
+
+
+
 
 }

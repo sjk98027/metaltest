@@ -4,11 +4,14 @@ using System.Collections;
 public class NormalSolder : MonsterSetting {
 	//monsterSetting contain monsterinfomation; 
 
-	UnHaveLifeBullet unHavelifeBullet;
-	//public int statenumber = 2;
 	public int weaponAttackCyclic;
-
+	public GameObject bulletPrefeb;
 	public Animator monsterAni;
+	public Transform[] firePosition;
+	//statenumber =  0 idle, 1 scare, 2 attack;
+	public int statenumber = 2;
+
+
 
 
 	public enum monsterNormalState{
@@ -23,23 +26,38 @@ public class NormalSolder : MonsterSetting {
 		life = 1;
 		MonsterSetting setting = gameObject.GetComponentInParent<MonsterSetting> ();
 		//test
-		unHavelifeBullet = gameObject.GetComponent<UnHaveLifeBullet> ();
+
 
 		monsterAni = gameObject.GetComponent<Animator> ();
 		Pattern (monsterNormalState.Idle);
-		//Instantiate (bullet);
+
 		attacktype = 0;
 		sR = gameObject.GetComponent<SpriteRenderer> ();
+		playerRealizeDistance = 30;
+		statenumber = 0;
+
+		player = GameObject.Find ("player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		//test
 		if(life != 0){
+			float playertomonsterdistance =Vector3.Distance(this.transform.position,player.gameObject.transform.position);
+
+			if(statenumber == 0){
+				Pattern (monsterNormalState.Idle);
+
+				if (playertomonsterdistance < playerRealizeDistance) {
+					Pattern (monsterNormalState.Attack);
+				}
+			}
 			if (Input.GetKeyDown (KeyCode.A)) {
 				Debug.Log ("hi");
-				Pattern (monsterNormalState.Run);
-				sR.flipX =true;
+				Pattern (monsterNormalState.Attack);
+				//Pattern (monsterNormalState.Run);
+				//sR.flipX =true;
 				//sr.flipX == true;
 
 			}
@@ -47,6 +65,7 @@ public class NormalSolder : MonsterSetting {
 //			{
 //				sR.flipX = false;
 //			}
+			
 
 			if (life <= 0) {
 				//Pattern (monsterNormalState.Death);
@@ -66,8 +85,8 @@ public class NormalSolder : MonsterSetting {
 
 	
 	public void Idle(){
-	
-		//idle.SetTrigger ("idle1");
+		monsterAni.SetTrigger ("idle");
+//		idle.SetTrigger ("idle1");
 	
 		//		if (playerRealizeDistance == 10)
 		//			Attack ();
@@ -75,13 +94,18 @@ public class NormalSolder : MonsterSetting {
 	
 	
 	public void  Attack(){
-		
+
+		monsterAni.SetTrigger("sitdowmfireinthehole");
 			if (attacktype == 0) {
-			
-			}
+			if (sR.flipX == true) {
+				GameObject bullet = Instantiate (bulletPrefeb, firePosition [1].position, Quaternion.identity) as GameObject;
+				bullet.transform.rotation = new Quaternion (0, 0, 180, 0);	} 
+				else {	GameObject bullet = Instantiate (bulletPrefeb, firePosition [0].position, Quaternion.identity) as GameObject;	}
+		}
 	
 			if (attacktype == 1) {
-			Instantiate (unHavelifeBullet.bullet, this.transform.position, transform.rotation);
+//			Instantiate (unHavelifeBullet.bullet, this.transform.position, transform.rotation);
+		//	bullet 
 			//Instantiate (UnHaveLifeBullet, this.transform.position, this.transform.rotation);
 			} 
 		
@@ -99,12 +123,42 @@ public class NormalSolder : MonsterSetting {
 		Destroy (this.gameObject, 5);
 
 	}
+//
+//	public void runningPattern(BulletName name)
+//	{
+//		switch (name) {
+//		case BulletName.normalbullet: 
+//			{
+			//Instantiate (bullet);
+//
+//
+//				break;
+//			}
+//
+//		case BulletName.guidancebullet: 
+//			{
+//				//if()
+//
+//
+//
+//				break;		
+//			}
+//
+//		case BulletName.parabolabullet:
+//			{
+//				break;
+//			}
+//
+//		}
+//	}
+
 	
 	
 	public void Pattern(monsterNormalState state){
 		switch(state){
 		case monsterNormalState.Idle:
 			{
+				
 				Idle ();
 				break;
 			}
@@ -120,6 +174,12 @@ public class NormalSolder : MonsterSetting {
 				Death ();
 				break;
 			}
+
+		case monsterNormalState.Attack:
+			{
+				Attack ();
+				break;
+			}
 		}
 	}
 
@@ -130,3 +190,5 @@ public class NormalSolder : MonsterSetting {
 		}
 	}
 }
+
+
