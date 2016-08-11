@@ -14,6 +14,7 @@ public class UnHaveLifeBullet : CreateBullet {
 
 
 
+
 	//get stateinfo , bulletname
 	AnimatorStateInfo bulletstate;
 
@@ -28,8 +29,8 @@ public class UnHaveLifeBullet : CreateBullet {
 	public BulletName bulletName;
 
 	void Start(){
-		CreateBullet createBullet = gameObject.GetComponentInParent<CreateBullet> ();
 
+		CreateBullet createBullet = gameObject.GetComponentInParent<CreateBullet> ();
 		//bullet = GameObject.Find("normalbullet").GetComponent<d
 		sR = gameObject.GetComponent<SpriteRenderer>();
 		string name = gameObject.layer.ToString ();
@@ -39,18 +40,22 @@ public class UnHaveLifeBullet : CreateBullet {
 
 	void Update(){
 		RunningPattern (BulletName.normalbullet);
+		Destroy (this.gameObject, 10);
 
-		Debug.Log (BulletName.guidancebullet);
-		Debug.Log ("hi");
 
 	}
 
 	public void OnCollisionEnter(Collision coll){
-		if (coll.gameObject.layer == LayerMask.NameToLayer ("playerweapon")) {
+		if (coll.gameObject.layer == LayerMask.NameToLayer ("player")) {
 			Destroy (this.gameObject);
-		}
+			//damage calculate;
 
-		//if()
+			coll.gameObject.SendMessage ("Death");
+
+			if (coll.gameObject.layer == LayerMask.NameToLayer ("slug")) {
+				//coll.gameObject.SendMessage
+			}
+		}
 	}
 
 	public void Searchbulletname()
@@ -65,13 +70,14 @@ public class UnHaveLifeBullet : CreateBullet {
 		case BulletName.normalbullet: 
 			{
 				this.gameObject.transform.Translate (1*Time.deltaTime*10, 0, 0);
-
+				//SendMessage()
 
 				break;
 			}
 
 		case BulletName.guidancebullet: 
 			{
+				
 				//if()
 
 

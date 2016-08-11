@@ -2,11 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Enemy\Enemy AI\NormalSolder.cs">
     <Files>
-      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\UnHaveLifeBullet.cs" Line="30" Column="15" />
-      <File FileName="Assets\Enemy\Enemy AI\Monster\ArabianSolder.cs" Line="105" Column="6" />
-      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\CreateBullet.cs" Line="7" Column="20" />
-      <File FileName="Assets\Enemy\Enemy AI\MonsterSetting.cs" Line="23" Column="2" />
-      <File FileName="Assets\Enemy\Enemy AI\NormalSolder.cs" Line="88" Column="34" />
+      <File FileName="Assets\Enemy\Enemy AI\NormalSolder.cs" Line="82" Column="4" />
+      <File FileName="Assets\Enemy\Enemy AI\Monster\ArabianSolder.cs" Line="1" Column="1" />
+      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\CreateBullet.cs" Line="7" Column="23" />
+      <File FileName="Assets\Enemy\Enemy AI\MonsterSetting.cs" Line="10" Column="2" />
+      <File FileName="Assets\TK2DROOT\tk2d\Code\Sprites\tk2dEditorSpriteDataUnloader.cs" Line="89" Column="19" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.NUnit.TestPad">
