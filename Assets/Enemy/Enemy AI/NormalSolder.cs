@@ -8,19 +8,23 @@ public class NormalSolder : MonsterSetting {
 	public GameObject bulletPrefeb;
 	public Animator monsterAni;
 	public Transform[] firePosition;
+	public GameObject knipe;
 
 	//cheak list
 	//scarecheck = if(monsterrealize) once true -> no return scare;
-	public bool scarecheck = false;
+	public bool scareCheck = false;
 	//sprite flip on off
-	public bool spincheck = false;
+	public bool spinCheck = false;
+	public bool runCheck = false;
 
 	//attack type distance 
 	public int fireIntheHoleDistance=20;
 	public int sitDownFireIntheHoleDistance = 10;
 	public int jumpKnipeAttackDistance = 5;
 	public int knipeAttackDistance = 2;
+	public float attackcyle = 0;
 
+	//bullet instantiate, knipe wear timing == animation event process;
 
 
 
@@ -28,7 +32,6 @@ public class NormalSolder : MonsterSetting {
 		Idle ,
 		Scare,
 		Run,
-		Attack,
 		Death,
 
 		FIH,
@@ -41,15 +44,20 @@ public class NormalSolder : MonsterSetting {
 	void Start () {
 		life = 1;
 		MonsterSetting setting = gameObject.GetComponentInParent<MonsterSetting> ();
-		//test
-		monsterAni = gameObject.GetComponent<Animator> ();
-		Pattern (monsterNormalState.Idle);
-
 		attacktype = 0;
 		sR = gameObject.GetComponent<SpriteRenderer> ();
 		playerRealizeDistance = 30;
 
+
+		//test
+		monsterAni = gameObject.GetComponent<Animator> ();
+		Pattern (monsterNormalState.Idle);
+
+
+
 		player = GameObject.Find ("player");
+		knipe = gameObject.GetComponent<GameObject> ();
+		knipe.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -57,130 +65,141 @@ public class NormalSolder : MonsterSetting {
 		
 		//test
 		if (life != 0) {
-			float playerToMonsterDistance = Vector3.Distance (this.transform.position, player.gameObject.transform.position);
+			//such player distance and rotate;
+			Vector2 distanceVector2 = new Vector2 (this.gameObject.transform.position.x - player.gameObject.transform.position.x, this.gameObject.transform.position.y - player.gameObject.transform.position.y);
+			//if turntoplayer == +, ->;  else turntoplayer == - ,<-;
+			float playerToMonsterDistance = Mathf.Abs(distanceVector2.x);
+			float turnCheckDistance = distanceVector2.x;
 
+
+			if (turnCheckDistance >= 0) {
+				spinCheck = true;
+			}
+			if (turnCheckDistance < 0) {
+				spinCheck = false;
+			}
+			TurnMonster ();
+
+//			float playerToMonsterDistance = Vector3.Distance (this.transform.position, player.gameObject.transform.position);
+//
 			if (playerToMonsterDistance > playerRealizeDistance) {
 				Pattern (monsterNormalState.Idle);
 			}
-			if (playerToMonsterDistance <= playerRealizeDistance & scarecheck == false) {
+			if (playerToMonsterDistance <= playerRealizeDistance & scareCheck == false) {
 				Pattern (monsterNormalState.Scare);
-				//scarecheck == true;
 			}
-			if(scarecheck == true){
+			if(scareCheck == true){
+				if (playerToMonsterDistance > fireIntheHoleDistance) {
+					runCheck = true;
+					Pattern (monsterNormalState.Run);
+				}
 				if (playerToMonsterDistance < fireIntheHoleDistance) {
-					if (playerToMonsterDistance < knipeAttackDistance) {
-						Pattern (monsterNormalState.KA);
-					} else if (playerToMonsterDistance <= jumpKnipeAttackDistance & playerToMonsterDistance > knipeAttackDistance) {
-						Pattern (monsterNormalState.JKA);		
-					} else if (playerToMonsterDistance <= sitDownFireIntheHoleDistance & playerToMonsterDistance < jumpKnipeAttackDistance) {
-						Pattern (monsterNormalState.SFIH);
-					} else if (playerToMonsterDistance > sitDownFireIntheHoleDistance) {
-						Pattern (monsterNormalState.FIH);
-					}
+					attackcyle += Time.deltaTime;
+					runCheck = false;
+						if (playerToMonsterDistance < knipeAttackDistance) {
+							if (attackcyle >= 1.5) {
+								Pattern (monsterNormalState.KA);
+							}
+						} else if (playerToMonsterDistance <= jumpKnipeAttackDistance & playerToMonsterDistance > knipeAttackDistance) {
+							if (attackcyle >= 1.5) {
+								Pattern (monsterNormalState.JKA);
+							}	
+						} else if (playerToMonsterDistance <= sitDownFireIntheHoleDistance & playerToMonsterDistance > jumpKnipeAttackDistance) {
+							if (attackcyle >= 3) {
+								Pattern (monsterNormalState.SFIH);
+							}
+						} else if (playerToMonsterDistance > sitDownFireIntheHoleDistance) {
+							if (attackcyle >= 1.5) {
+								Pattern (monsterNormalState.FIH);
+							}
+						}
 
 				}
-			
-			
-			
-			
-			
-			
-			
-//			if (playerToMonsterDistance < fireIntheHoleDistance) {
-//				if (playerToMonsterDistance > sitDownFireIntheHoleDistance) {
-//					Pattern (monsterNormalState.FIH);
-//				}
-//				else if (playerToMonsterDistance > jumpKnipeAttackDistance) {
-//					Pattern (monsterNormalState.SFIH);
-//				}
-//
-//				else if (playerToMonsterDistance > knipeAttackDistance) {
-//					Pattern (monsterNormalState.JKA);
-//				}
-//				else if (playerToMonsterDistance > 0)
-//					Pattern (monsterNormalState.KA);
-//			
+				if (playerRealizeDistance >= 100) {
+					Pattern (monsterNormalState.Death);
+				}
+
+				if (life <= 0) {
+					Pattern (monsterNormalState.Death);
+				}
 			
 			}
 		}
-
-			
-			
+	}
 
 
-
-			//Pattern (monsterNormalState.Attack);
-
-
-//			if (Input.GetKeyDown (KeyCode.A)) {
-//				Debug.Log ("hi");
-//				Pattern (monsterNormalState.Attack);
-
-
-				//Pattern (monsterNormalState.Run);
-				//sR.flipX =true;
-				//sr.flipX == true;
-
-			
-//			if(Input.GetKeyUp(KeyCode.A))
-//			{
-//				sR.flipX = false;
-//			}
-			
-
-		
-			if (playerRealizeDistance >= 1000) {
-				Pattern (monsterNormalState.Death);
-
-			}
-
-		if (life <= 0) {
-			Pattern (monsterNormalState.Death);
+	public void TurnMonster()
+	{
+		if (!spinCheck) {
+			sR.flipX = false;
+		}
+		else if (spinCheck) {
+			sR.flipX = true;
 		}
 	}
 
 
 	public void Pattern(monsterNormalState state){
 		switch(state){
+		//if()
 		case monsterNormalState.Idle:
 			{
-
-				Idle ();break;
+				monsterAni.SetTrigger ("Idle");
+				break;
 			}
 		case monsterNormalState.Scare:
 			{
-				Scare ();break;
+				monsterAni.SetTrigger ("Scare");
+				monsterAni.SetTrigger ("ScareRun");
+				scareCheck = true;
+				this.gameObject.transform.Translate (6 * Time.deltaTime, 0, 0);
+				break;
 			}
 
 		case monsterNormalState.Run:
 			{
-				Run ();	break;
+				if (spinCheck) {
+					this.gameObject.transform.Translate (-4 * Time.deltaTime, 0, 0);
+					monsterAni.SetTrigger ("Run");
+				} else if (!spinCheck) {
+					this.gameObject.transform.Translate (4 * Time.deltaTime, 0, 0);
+					monsterAni.SetTrigger ("Run");
+				}
+					break;
 			}
 
 		case monsterNormalState.Death:
 			{
-				Death ();break;
+				Destroy (this.gameObject, 5);
+				break;
 			}
 
-		case monsterNormalState.Attack:
-			{
-				Attack ();break;
-			}
+
 		case monsterNormalState.FIH:
 			{
-				monsterAni.SetTrigger ("FireIntheHole");break;
+				monsterAni.SetTrigger ("FireIntheHole");
+				attackcyle = 0;
+				break;
 			}
 		case monsterNormalState.SFIH:
 			{
-				monsterAni.SetTrigger ("SitDownFireIntheHole");	break;
+				monsterAni.SetTrigger ("SitDownFireIntheHole");
+				attackcyle = 0;
+				break;
 			}
 		case monsterNormalState.JKA:
 			{
-				monsterAni.SetTrigger ("JumpKnipeAttack");	break;
+				monsterAni.SetTrigger ("JumpKnipeAttack");
+				attackcyle = 0;
+				break;
+
 			}
 		case monsterNormalState.KA:
 			{
-				monsterAni.SetTrigger ("Knipeattack");	break;
+				monsterAni.SetTrigger ("Knipeattack");	
+				attackcyle = 0;
+				break;
+
 			}
 
 
@@ -194,49 +213,28 @@ public class NormalSolder : MonsterSetting {
 		}
 	}
 
-	
-
-	
-	public void Idle(){
-		monsterAni.SetTrigger ("Idle");
-	}
-
-	public void Scare(){
-		monsterAni.SetTrigger ("Scare");
-		monsterAni.SetTrigger ("ScareRun");
-		scarecheck = true;
-	}
-	
-	
-	public void  Attack(){
-		{
-			monsterAni.SetTrigger ("sitdowmfireinthehole");
-			if (attacktype == 0) {
-				if (sR.flipX == true) {
-					GameObject bullet = Instantiate (bulletPrefeb, firePosition [1].position, Quaternion.identity) as GameObject;
-					bullet.transform.rotation = new Quaternion (0, 0, 180, 0);
-				} else {
-					GameObject bullet = Instantiate (bulletPrefeb, firePosition [0].position, Quaternion.identity) as GameObject;
-				}
-			}
-	
-			if (attacktype == 1) {
-
-			} else
-				Idle ();
-		}
-	}
-	
-	public void Run()
+	public void InstantiateBullet()
 	{
-		this.gameObject.transform.Translate(4*Time.deltaTime, 0, 0);
-		monsterAni.SetTrigger ("Run");
+		if (sR.flipX == true) {
+			GameObject bullet = Instantiate (bulletPrefeb, firePosition [1].position, Quaternion.identity) as GameObject;
+			bullet.transform.rotation = new Quaternion (0, 0, 180, 0);
+		} else {
+			GameObject bullet = Instantiate (bulletPrefeb, firePosition [0].position, Quaternion.identity) as GameObject;
+		}
+
+		Debug.Log ("hay");
 	}
 
-	public void Death(){
-		Destroy (this.gameObject, 5);
-
+	public void KnipeWear()
+	{
+		knipe.SetActive (true);
 	}
+
+	public void KnipeUndress()
+	{
+		knipe.SetActive (false);
+	}
+
 
 
 

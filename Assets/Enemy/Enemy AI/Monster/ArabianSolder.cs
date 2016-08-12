@@ -79,9 +79,16 @@ public class ArabianSolder : MonsterSetting {
 		//such player distance and rotate;
 		Vector2 distanceVector2 = new Vector2 (arabianSolder.transform.position.x - user.transform.position.x, arabianSolder.transform.position.y - user.transform.position.y);
 		//if turntoplayer == +, ->;  else turntoplayer == - ,<-;
+
 		turnToPlayer = distanceVector2.x;
 		playerRealizeDistance		= distanceVector2.magnitude;
 
+		if (distanceVector2.x >= 0) {
+			sR.flipX = false;
+		}
+		else if (distanceVector2.x<0) {
+			sR.flipX = true;
+		}
 	}
 
 
