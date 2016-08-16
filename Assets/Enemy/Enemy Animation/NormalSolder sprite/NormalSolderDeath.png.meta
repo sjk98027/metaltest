@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: 88d275233e9d14a4abb3a76a5443a9ed
-timeCreated: 1470367143
+guid: e25fe15ff4256fd49b36eabf358d6c42
+timeCreated: 1471315350
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: NormalSolderMinigunDeath_0
-    21300002: NormalSolderMinigunDeath_1
-    21300004: NormalSolderMinigunDeath_2
-    21300006: NormalSolderMinigunDeath_3
-    21300008: NormalSolderMinigunDeath_4
-    21300010: NormalSolderMinigunDeath_5
-    21300012: NormalSolderMinigunDeath_6
-    21300014: NormalSolderMinigunDeath_7
-    21300016: NormalSolderMinigunDeath_8
-    21300018: NormalSolderMinigunDeath_9
-    21300020: NormalSolderMinigunDeath_10
+    21300000: NormalSolderDeath_10
+    21300002: NormalSolderDeath_9
+    21300004: NormalSolderDeath_8
+    21300006: NormalSolderDeath_7
+    21300008: NormalSolderDeath_6
+    21300010: NormalSolderDeath_5
+    21300012: NormalSolderDeath_4
+    21300014: NormalSolderDeath_3
+    21300016: NormalSolderDeath_2
+    21300018: NormalSolderDeath_1
+    21300020: NormalSolderDeath_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -63,135 +63,135 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_0
+      name: NormalSolderDeath_10
       rect:
         serializedVersion: 2
         x: 0
         y: 2
-        width: 29
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 31
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_1
+      name: NormalSolderDeath_9
       rect:
         serializedVersion: 2
-        x: 38
+        x: 40
         y: 2
-        width: 28
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 31
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_2
+      name: NormalSolderDeath_8
       rect:
         serializedVersion: 2
-        x: 74
+        x: 75
         y: 2
         width: 28
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_3
+      name: NormalSolderDeath_7
       rect:
         serializedVersion: 2
         x: 112
         y: 2
         width: 27
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_4
+      name: NormalSolderDeath_6
       rect:
         serializedVersion: 2
-        x: 147
-        y: 2
-        width: 27
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - serializedVersion: 2
-      name: NormalSolderMinigunDeath_5
-      rect:
-        serializedVersion: 2
-        x: 184
-        y: 2
-        width: 27
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - serializedVersion: 2
-      name: NormalSolderMinigunDeath_6
-      rect:
-        serializedVersion: 2
-        x: 218
+        x: 151
         y: 2
         width: 27
         height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_7
+      name: NormalSolderDeath_5
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 2
+        width: 27
+        height: 34
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderDeath_4
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 2
+        width: 27
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: NormalSolderDeath_3
       rect:
         serializedVersion: 2
         x: 257
         y: 2
         width: 27
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_8
+      name: NormalSolderDeath_2
       rect:
         serializedVersion: 2
-        x: 293
+        x: 294
         y: 2
         width: 28
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 40
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_9
+      name: NormalSolderDeath_1
       rect:
         serializedVersion: 2
-        x: 325
+        x: 330
         y: 2
-        width: 31
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 28
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - serializedVersion: 2
-      name: NormalSolderMinigunDeath_10
+      name: NormalSolderDeath_0
       rect:
         serializedVersion: 2
-        x: 365
+        x: 367
         y: 2
-        width: 31
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 29
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []

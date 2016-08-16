@@ -51,6 +51,7 @@
      <Compile Include="Assets\Enemy\Enemy AI\Monster\ArabianSolder.cs" />
      <Compile Include="Assets\Enemy\Enemy AI\MonsterSetting.cs" />
      <Compile Include="Assets\Enemy\Enemy AI\NormalSolder.cs" />
+     <Compile Include="Assets\Knipe.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCamera.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCameraAnchor.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCameraUtil.cs" />
