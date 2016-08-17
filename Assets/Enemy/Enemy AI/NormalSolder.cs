@@ -11,14 +11,17 @@ public class NormalSolder : MonsterSetting {
 	public Animator monsterAni;
 	public Transform[] firePosition;
 	public GameObject Knipe;
+	public AnimatorStateInfo aniStateInfo;
+	public AnimationEvent aniEvent;
 
 	//cheak list
 	//scarecheck = if(monsterrealize) once true -> no return scare;
-	bool scareCheck = false;
+	public bool scareCheck = false;
 	//sprite flip on off
 	bool spinCheck = false;
 	bool runCheck = false;
 	//bool attackCheck = false;
+
 
 
 	//attack type distance 
@@ -31,11 +34,11 @@ public class NormalSolder : MonsterSetting {
 	//bullet instantiate, knipe wear timing == animation event process;
 
 	Vector2 distanceVector2;
-	float playerToMonsterDistance;
+	public float playerToMonsterDistance;
 	float turnCheckDistance;
 
-	public enum monsterNormalState{
-		Idle ,
+	public enum monsterNormalStateName{
+		Idle =1,
 		Scare,
 		Run,
 		Death,
@@ -55,7 +58,7 @@ public class NormalSolder : MonsterSetting {
 
 		//test
 		monsterAni = gameObject.GetComponent<Animator> ();
-		Pattern (monsterNormalState.Idle);
+		Pattern (monsterNormalStateName.Idle);
 
 
 
@@ -67,7 +70,8 @@ public class NormalSolder : MonsterSetting {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		aniStateInfo = monsterAni.GetCurrentAnimatorStateInfo (0);
+
 		//test
 		if (life != 0) {
 			//such player distance and rotate;
@@ -75,7 +79,7 @@ public class NormalSolder : MonsterSetting {
 			//if turntoplayer == +, ->;  else turntoplayer == - ,<-;
 			playerToMonsterDistance = Mathf.Abs(distanceVector2.x);
 			turnCheckDistance = distanceVector2.x;
-			testvalue = playerToMonsterDistance;
+			//testvalue = playerToMonsterDistance;
 
 			if (turnCheckDistance >= 0) {
 				spinCheck = true;
@@ -85,38 +89,63 @@ public class NormalSolder : MonsterSetting {
 			}
 			TurnMonster ();
 
-			//pattern Condition;
-			if (playerToMonsterDistance > playerRealizeDistance) {
-				Pattern (monsterNormalState.Idle);
-			}
-			if (playerToMonsterDistance <= playerRealizeDistance &&	 !scareCheck) {
-				Pattern (monsterNormalState.Scare);
-			}
-			if (scareCheck) {
-				if (playerToMonsterDistance > fireIntheHoleDistance) {
-					runCheck = true;
-					Pattern (monsterNormalState.Run);
+
+			if (playerToMonsterDistance <= playerRealizeDistance &&	!scareCheck) {
+				Pattern (monsterNormalStateName.Scare);
+				if(aniStateInfo.IsName ("Base Layer.NormalSolderScare")){
+					scareCheck = true;
+
+					Debug.Log ("Ai");
 				}
+
+
+
+			}	
+
+
+
+
+			//pattern Condition;
+			else if (playerToMonsterDistance < playerRealizeDistance && scareCheck) 
+			{
+				if (playerToMonsterDistance > fireIntheHoleDistance) {
+						runCheck = true;
+						if (runCheck) {
+						
+							Pattern (monsterNormalStateName.Run);
+							
+						}
+					} else {
+						Pattern (monsterNormalStateName.Idle);
+					}
+
+			}
+
+
+		
+
 
 				//pattern is Taked playerToMonsterDistance;
 				if (playerToMonsterDistance <= fireIntheHoleDistance) {
 					attackCyle += Time.deltaTime;	
 					runCheck = false;
+					monsterAni.SetBool ("Run", false);
+
 					if (playerToMonsterDistance < knipeAttackDistance) {
-						if (attackCyle >= 3) {
-							Pattern (monsterNormalState.KA);
+						if (attackCyle >= 1.5) {
+							Pattern (monsterNormalStateName.KA);
 						}
 					} else if (playerToMonsterDistance <= jumpKnipeAttackDistance & playerToMonsterDistance > knipeAttackDistance) {
-						if (attackCyle >= 3) {
-							Pattern (monsterNormalState.JKA);
+						if (attackCyle >= 1.5) {
+							Pattern (monsterNormalStateName.JKA);
 						}	
 					} else if (playerToMonsterDistance <= sitDownFireIntheHoleDistance & playerToMonsterDistance > jumpKnipeAttackDistance) {
-						if (attackCyle >= 3) {
-							Pattern (monsterNormalState.SFIH);
+						if (attackCyle >= 1.5) {
+							Pattern (monsterNormalStateName.SFIH);
 						}
 					} else if (playerToMonsterDistance > sitDownFireIntheHoleDistance) {
-						if (attackCyle >= 3) {
-							Pattern (monsterNormalState.FIH);
+						if (attackCyle >= 1.5) {
+							Pattern (monsterNormalStateName.FIH);
 						}
 					}
 
@@ -124,28 +153,16 @@ public class NormalSolder : MonsterSetting {
 
 				//monster death Condition;
 				if (playerRealizeDistance >= 100) {
-					Pattern (monsterNormalState.Death);
+					Pattern (monsterNormalStateName.Death);
 				}
 
-
-			
 			}
-		}
+
 		if (life <= 0) {
-			Pattern (monsterNormalState.Death);
+			Pattern (monsterNormalStateName.Death);
 		}
 
 	}
-
-//StartCoroutine(Shoot());
-
-//	IEnumerator Shoot(){
-//		//isShooting = true; 
-//		for(int i=0;i<10;i++){yield return new WaitForSeconds(0.5f);
-//			//총쏘기
-//		}
-//		//isShooting = false;
-//		} 
 
 	public void TurnMonster()
 	{
@@ -158,30 +175,49 @@ public class NormalSolder : MonsterSetting {
 	}
 
 
-	public void Pattern(monsterNormalState state){
+	public void Pattern(monsterNormalStateName state){
 		switch(state){
 
-		case monsterNormalState.Idle:
+		case monsterNormalStateName.Idle:
 			{
+				monsterAni.SetBool ("Scare", false);
 				monsterAni.SetTrigger ("Idle");
 				break;
 			}
-		case monsterNormalState.Scare:
+		case monsterNormalStateName.Scare:
 			{
-				monsterAni.SetTrigger ("Scare");
-				this.gameObject.transform.Translate (0 * Time.deltaTime, 0, 0);
-				scareCheck = true;
+				monsterAni.SetBool ("Scare",true);
 
-				if (scareCheck) {
-					monsterAni.SetTrigger ("Idle");
-				}
+
+//				{
+//					monsterAni.SetTrigger ("Idle");
+//					scareCheck = true;
+//				}
+
+
+
+
+
+//				monsterAni.SetTrigger ("Scare");
+//				//AnimationState
+//				if (monsterAni.GetCurrentAnimatorStateInfo (0).IsName ("Base Layer.Scare")) {
+//					this.gameObject.transform.Translate (0 * Time.deltaTime, 0, 0);
+//					scareCheck = true;
+//
+//					if (scareCheck) {
+//						monsterAni.SetTrigger ("Idle");
+//						break;
+//					}
+//
+//				}
 				break;
+
 			}
 
-		case monsterNormalState.Run:
+		case monsterNormalStateName.Run:
 			{
-				if(runCheck){
-					monsterAni.SetTrigger ("Run");
+				monsterAni.SetBool ("Scare", false);
+				monsterAni.SetBool("Run",true);
 					if (spinCheck) {
 						this.gameObject.transform.Translate (-4 * Time.deltaTime, 0, 0);
 						monsterAni.SetTrigger ("Idle");
@@ -190,14 +226,10 @@ public class NormalSolder : MonsterSetting {
 						this.gameObject.transform.Translate (4 * Time.deltaTime, 0, 0);
 						monsterAni.SetTrigger ("Idle");
 					}
-				}
-
-			
-				Debug.Log ("ho");
 				break;
 			}
 
-		case monsterNormalState.Death:
+		case monsterNormalStateName.Death:
 			{
 				monsterAni.SetTrigger ("Death");
 				if (spinCheck) {
@@ -210,42 +242,42 @@ public class NormalSolder : MonsterSetting {
 			}
 
 
-		case monsterNormalState.FIH:
+		case monsterNormalStateName.FIH:
 			{
 				monsterAni.SetTrigger ("FireIntheHole");
 				attackCyle = 0;
 
-				if (playerToMonsterDistance > fireIntheHoleDistance || playerToMonsterDistance <= sitDownFireIntheHoleDistance) {
+//				if (playerToMonsterDistance > fireIntheHoleDistance || playerToMonsterDistance <= sitDownFireIntheHoleDistance) {
 					monsterAni.SetTrigger ("Idle");
-				}
+//				}
 				break;
 			}
-		case monsterNormalState.SFIH:
+		case monsterNormalStateName.SFIH:
 			{
 				monsterAni.SetTrigger ("SitDownFireIntheHole");
 				attackCyle = 0;
-				if (playerToMonsterDistance > sitDownFireIntheHoleDistance || playerToMonsterDistance <= jumpKnipeAttackDistance) {
+//				if (playerToMonsterDistance > sitDownFireIntheHoleDistance || playerToMonsterDistance <= jumpKnipeAttackDistance) {
 					monsterAni.SetTrigger ("Idle");
-				}
+//				}
 				break;
 			}
-		case monsterNormalState.JKA:
+		case monsterNormalStateName.JKA:
 			{
 				monsterAni.SetTrigger ("JumpKnipeAttack");
 				attackCyle = 0;
-				if (playerToMonsterDistance > jumpKnipeAttackDistance || playerToMonsterDistance <= knipeAttackDistance) {
+//				if (playerToMonsterDistance > jumpKnipeAttackDistance || playerToMonsterDistance <= knipeAttackDistance) {
 					monsterAni.SetTrigger ("Idle");
-				}
+//				}
 				break;
 
 			}
-		case monsterNormalState.KA:
+		case monsterNormalStateName.KA:
 			{
 				monsterAni.SetTrigger ("Knipeattack");	
 				attackCyle = 0;
-				if (playerToMonsterDistance > knipeAttackDistance) {
+//				if (playerToMonsterDistance > knipeAttackDistance) {
 					monsterAni.SetTrigger ("Idle");
-				}
+//				}
 				break;
 
 			}
@@ -253,6 +285,8 @@ public class NormalSolder : MonsterSetting {
 
 		}
 	}
+
+
 
 
 	public void OncollisionEnter2D(Collider2D coll){		
@@ -269,8 +303,6 @@ public class NormalSolder : MonsterSetting {
 		} else if(!spinCheck){
 			GameObject bullet = Instantiate (bulletPrefeb, firePosition [0].position, Quaternion.identity) as GameObject;
 		}
-
-		Debug.Log ("hay");
 	}
 
 	public void KnipeWear()
@@ -292,6 +324,33 @@ public class NormalSolder : MonsterSetting {
 		Knipe.SetActive (false);
 	}
 
+//	IEnumerator Scare(){
+//		monsterAni.SetTrigger ("Scare");
+//
+//		yield return new WaitForSeconds (2);
+//		monsterAni.SetTrigger ("Idle");
+//		scareCheck = true;
+//
+//	}
+
+	//StartCoroutine(Shoot());
+
+//	IEnumerator AttackRunning(){
+//		attackCheck = true;
+//
+//		yield return new WaitForSeconds (5);
+//
+//
+//	}
+
+
+	//	IEnumerator Shoot(){
+	//		//isShooting = true; 
+	//		for(int i=0;i<10;i++){yield return new WaitForSeconds(0.5f);
+	//			//총쏘기
+	//		}
+	//		//isShooting = false;
+	//		} 
 
 
 
