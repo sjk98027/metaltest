@@ -13,6 +13,8 @@ public class NormalSolder : MonsterSetting {
 	public GameObject Knipe;
 	public AnimatorStateInfo aniStateInfo;
 	public AnimationEvent aniEvent;
+	public AnimationClip aniClip;
+	public int monsterState = 0;
 
 	//cheak list
 	//scarecheck = if(monsterrealize) once true -> no return scare;
@@ -38,14 +40,15 @@ public class NormalSolder : MonsterSetting {
 	float turnCheckDistance;
 
 	public enum monsterNormalStateName{
-		Idle =1,
+		Idle =0,
+		FIH=1,
+		SFIH=2,
+		JKA=3,
+		KA=4,
 		Scare,
 		Run,
 		Death,
-		FIH,
-		SFIH,
-		JKA,
-		KA,
+
 	}
 
 	// Use this for initialization
@@ -62,7 +65,7 @@ public class NormalSolder : MonsterSetting {
 
 
 
-		player = GameObject.Find ("player");
+		player = GameObject.Find ("Player");
 		Knipe = GameObject.Find ("knipe");
 
 		Knipe.SetActive (false);
@@ -92,37 +95,39 @@ public class NormalSolder : MonsterSetting {
 
 			if (playerToMonsterDistance <= playerRealizeDistance &&	!scareCheck) {
 				Pattern (monsterNormalStateName.Scare);
-				if(aniStateInfo.IsName ("Base Layer.NormalSolderScare")){
-					scareCheck = true;
-
-					Debug.Log ("Ai");
 				}
 
 
 
-			}	
+
+
+
+
+
 
 
 
 
 			//pattern Condition;
-			else if (playerToMonsterDistance < playerRealizeDistance && scareCheck) 
+			else if (playerToMonsterDistance < playerRealizeDistance && scareCheck ) 
 			{
-				if (playerToMonsterDistance > fireIntheHoleDistance) {
+				if (monsterAni.GetCurrentAnimatorStateInfo (0).shortNameHash != Animator.StringToHash ("NormalSolderScare")) {
+					
+					if (playerToMonsterDistance > fireIntheHoleDistance) {
+						//animation runevent runcheck;	
 						runCheck = true;
+
 						if (runCheck) {
-						
-							Pattern (monsterNormalStateName.Run);
-							
+							Pattern (monsterNormalStateName.Run);					
 						}
 					} else {
 						Pattern (monsterNormalStateName.Idle);
 					}
-
+				}
 			}
 
 
-		
+
 
 
 				//pattern is Taked playerToMonsterDistance;
@@ -180,52 +185,73 @@ public class NormalSolder : MonsterSetting {
 
 		case monsterNormalStateName.Idle:
 			{
-				monsterAni.SetBool ("Scare", false);
-				monsterAni.SetTrigger ("Idle");
+				monsterAni.SetInteger ("State", 0);
 				break;
 			}
-		case monsterNormalStateName.Scare:
+		
+
+
+		case monsterNormalStateName.FIH:
 			{
-				monsterAni.SetBool ("Scare",true);
+				monsterAni.SetInteger ("State",1);
+				attackCyle = 0;
 
 
-//				{
-//					monsterAni.SetTrigger ("Idle");
-//					scareCheck = true;
+//				if (playerToMonsterDistance > fireIntheHoleDistance || playerToMonsterDistance <= sitDownFireIntheHoleDistance) {
+
 //				}
+				break;
+			}
+		case monsterNormalStateName.SFIH:
+			{
+				monsterAni.SetInteger ("State",2);
+				attackCyle = 0;
+//				if (playerToMonsterDistance > sitDownFireIntheHoleDistance || playerToMonsterDistance <= jumpKnipeAttackDistance) {
 
-
-
-
-
-//				monsterAni.SetTrigger ("Scare");
-//				//AnimationState
-//				if (monsterAni.GetCurrentAnimatorStateInfo (0).IsName ("Base Layer.Scare")) {
-//					this.gameObject.transform.Translate (0 * Time.deltaTime, 0, 0);
-//					scareCheck = true;
-//
-//					if (scareCheck) {
-//						monsterAni.SetTrigger ("Idle");
-//						break;
-//					}
-//
+//				}
+				break;
+			}
+		case monsterNormalStateName.JKA:
+			{
+				monsterAni.SetInteger ("State",3);
+				attackCyle = 0;
+//				if (playerToMonsterDistance > jumpKnipeAttackDistance || playerToMonsterDistance <= knipeAttackDistance) {
+					
 //				}
 				break;
 
+			}
+		case monsterNormalStateName.KA:
+			{
+				monsterAni.SetInteger ("State",4);	
+				attackCyle = 0;
+//				if (playerToMonsterDistance > knipeAttackDistance) {
+
+//				}
+				break;
+
+			}
+
+		case monsterNormalStateName.Scare:
+			{
+				monsterAni.SetInteger ("State",10);
+
+				break;
 			}
 
 		case monsterNormalStateName.Run:
 			{
-				monsterAni.SetBool ("Scare", false);
 				monsterAni.SetBool("Run",true);
+				{
 					if (spinCheck) {
 						this.gameObject.transform.Translate (-4 * Time.deltaTime, 0, 0);
-						monsterAni.SetTrigger ("Idle");
+						monsterAni.SetInteger ("State", 0);
 
 					} else if (!spinCheck) {
 						this.gameObject.transform.Translate (4 * Time.deltaTime, 0, 0);
-						monsterAni.SetTrigger ("Idle");
+						monsterAni.SetInteger ("State", 0);
 					}
+				}
 				break;
 			}
 
@@ -242,47 +268,6 @@ public class NormalSolder : MonsterSetting {
 			}
 
 
-		case monsterNormalStateName.FIH:
-			{
-				monsterAni.SetTrigger ("FireIntheHole");
-				attackCyle = 0;
-
-//				if (playerToMonsterDistance > fireIntheHoleDistance || playerToMonsterDistance <= sitDownFireIntheHoleDistance) {
-					monsterAni.SetTrigger ("Idle");
-//				}
-				break;
-			}
-		case monsterNormalStateName.SFIH:
-			{
-				monsterAni.SetTrigger ("SitDownFireIntheHole");
-				attackCyle = 0;
-//				if (playerToMonsterDistance > sitDownFireIntheHoleDistance || playerToMonsterDistance <= jumpKnipeAttackDistance) {
-					monsterAni.SetTrigger ("Idle");
-//				}
-				break;
-			}
-		case monsterNormalStateName.JKA:
-			{
-				monsterAni.SetTrigger ("JumpKnipeAttack");
-				attackCyle = 0;
-//				if (playerToMonsterDistance > jumpKnipeAttackDistance || playerToMonsterDistance <= knipeAttackDistance) {
-					monsterAni.SetTrigger ("Idle");
-//				}
-				break;
-
-			}
-		case monsterNormalStateName.KA:
-			{
-				monsterAni.SetTrigger ("Knipeattack");	
-				attackCyle = 0;
-//				if (playerToMonsterDistance > knipeAttackDistance) {
-					monsterAni.SetTrigger ("Idle");
-//				}
-				break;
-
-			}
-
-
 		}
 	}
 
@@ -295,6 +280,8 @@ public class NormalSolder : MonsterSetting {
 		}
 	}
 
+
+	//animation event method;
 	public void InstantiateBullet()
 	{
 		if (spinCheck) {
@@ -319,16 +306,28 @@ public class NormalSolder : MonsterSetting {
 		}
 	}
 
+	public void ScareOnCheck()
+	{
+		scareCheck = true;
+		monsterAni.SetInteger ("State", 0);
+
+	}
+
 	public void KnipeUndress()
 	{
 		Knipe.SetActive (false);
 	}
 
+
+
+
+
+
 //	IEnumerator Scare(){
-//		monsterAni.SetTrigger ("Scare");
+//		monsterAni.SetInteger ("Scare");
 //
 //		yield return new WaitForSeconds (2);
-//		monsterAni.SetTrigger ("Idle");
+//		monsterAni.SetInteger ("Idle");
 //		scareCheck = true;
 //
 //	}
