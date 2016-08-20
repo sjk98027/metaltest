@@ -2,38 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Enemy\Enemy AI\EnemyBullet\UnHaveLifeBullet.cs">
     <Files>
-      <File FileName="Assets\Enemy\Enemy AI\NormalSolder.cs" Line="201" Column="5" />
+      <File FileName="Assets\Enemy\Enemy AI\NormalSolder.cs" Line="1" Column="1" />
       <File FileName="Assets\Enemy\Enemy AI\MonsterSetting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\UnHaveLifeBullet.cs" Line="53" Column="3" />
+      <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\UnHaveLifeBullet.cs" Line="87" Column="29" />
       <File FileName="Assets\Enemy\Enemy AI\EnemyBullet\CreateBullet.cs" Line="23" Column="2" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="metaltest" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Enemy" expanded="True">
-                <Node name="Enemy AI" expanded="True">
-                  <Node name="EnemyBullet" expanded="True">
-                    <Node name="UnHaveLifeBullet.cs" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="metaltest" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <RunToCursorBreakpoint file="C:\Users\User\Documents\metaltest\Assets\Enemy\Enemy AI\EnemyBullet\UnHaveLifeBullet.cs" line="148" column="4" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -18,6 +18,8 @@ public class UnHaveLifeBullet : CreateBullet {
 	float parabolaX;
 	float parabolaY;
 	float starty;
+	float startx;
+	//gravity 
 	float gravity = 0.1f;
 	float gravityaccel = 0.002f;
 	float parabolaVerticalAccel;
@@ -56,10 +58,12 @@ public class UnHaveLifeBullet : CreateBullet {
 		playposition = player.transform.position;
 
 		//this object transform.position.y ;
+		parabolaX = this.transform.position.x;
 		parabolaY = this.transform.position.y;
 		starty = this.transform.position.y;
+		startx = this.transform.position.y;
 		parabolastate = 1;
-		parabolaX = this.transform.position.x;
+
 		parabolaVerticalAccel = (playposition.x - parabolaX)/100;
 	}
 
@@ -71,6 +75,16 @@ public class UnHaveLifeBullet : CreateBullet {
 
 		//bullet destroy;
 		Destroy (this.gameObject, 10);
+
+//		float t = 0;
+//		t += Time.deltaTime;
+//	
+//
+//		if(t > dat) return;
+//		float x = startx + vx *t;
+//		float y = starty + vy * t- 0.5f * gravity * t* t;
+//
+//		return new Vector2(x,y);
 
 	}
 
@@ -116,13 +130,16 @@ public class UnHaveLifeBullet : CreateBullet {
 
 		case BulletName.parabolabullet:
 			{
+				//test
+
+
 				pos = new Vector2 (this.gameObject.transform.position.x, this.gameObject.transform.position.y);
 				pos.y = parabolaY;
 				pos.x = parabolaX;
 				gameObject.transform.position = pos;
 
 
-				parabolaBulletmove ();
+				//parabolaBulletmove ();
 
 
 //				this.gameObject.transform.Translate (player.transform.position, 0);
@@ -134,31 +151,56 @@ public class UnHaveLifeBullet : CreateBullet {
 		}
 	}
 
+	void testpara()
+	{
+		float maxy=1;
+		float mhh=1;
+		float dh = playposition.y - starty;
+		float mh = maxy - starty;
+
+		float vy = Mathf.Sqrt(2*gravity*mh);
+
+		float dat = (-2 * vy + Mathf.Sqrt (2 * vy * 2 * vy - 4 * gravity * 2 * dh)) / (2 * gravity);
+		float vx = -(startx - playposition.x) / dat;
+
+
+	}
+
+	//parabolabullet's movepattern;
 	void parabolaBulletmove ()
-	{parabolaX += parabolaVerticalAccel;
-		switch (parabolastate) 
-		{
-		case 1: 
-			{
-				gravity -= gravityaccel;
-				parabolaY += gravity;
+	{
+		//positionx moveprocess;
+		parabolaX += parabolaVerticalAccel;
 
-//				if (parabolaY >= starty+100) {
-//					parabolastate = 2;
-//				}
-				break;
-			}
-
-		case 2: 
-			{
-				
-				parabolaY -= gravity;
-				gravity += gravityaccel;
-				break;
-			}
-		
-
+		//positiony moveprocess;
+		gravity -= gravityaccel;
+		parabolaY += gravity;
+		if (parabolaY < starty - 30) {
+			Destroy (this.gameObject);
 		}
+//		switch (parabolastate) 
+//		{
+//		case 1: 
+//			{
+//				gravity -= gravityaccel;
+//				parabolaY += gravity;
+//
+////				if (parabolaY >= starty+100) {
+////					parabolastate = 2;
+////				}
+//				break;
+//			}
+//
+//		case 2: 
+//			{
+//				
+//				parabolaY -= gravity;
+//				gravity += gravityaccel;
+//				break;
+//			}
+//		
+//
+//		}
 	}
 
 	void OnTriggerEnter(Collider coll){
