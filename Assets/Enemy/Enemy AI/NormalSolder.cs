@@ -13,7 +13,7 @@ public class NormalSolder : MonsterSetting {
 	public GameObject Knipe;
 	public AnimatorStateInfo aniStateInfo;
 	public AnimationEvent aniEvent;
-	public AnimationClip aniClip;
+
 	public int monsterState = 0;
 
 	//cheak list

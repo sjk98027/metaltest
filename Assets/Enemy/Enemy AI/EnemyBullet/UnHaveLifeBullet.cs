@@ -15,18 +15,16 @@ public class UnHaveLifeBullet : CreateBullet {
 	public Vector2 playposition;
 	public Rigidbody2D rdb;
 
-	float parabolaX;
-	float parabolaY;
+
 	float starty;
 	float startx;
-	//gravity 
-	float gravity = 0.1f;
-	float gravityaccel = 0.002f;
-	float parabolaVerticalAccel;
 
-	int parabolastate;
+	float xSpeed;
+	float gravity = 5f;
+	float ySpeed = 5f;
 
-	float testtime;
+
+
 
 
 	//get stateinfo , bulletname
@@ -45,7 +43,7 @@ public class UnHaveLifeBullet : CreateBullet {
 	public BulletName bulletName;
 
 	void Start(){
-		testtime = Time.realtimeSinceStartup;
+		//testtime = Time.realtimeSinceStartup;
 
 
 		CreateBullet createBullet = gameObject.GetComponentInParent<CreateBullet> ();
@@ -58,33 +56,21 @@ public class UnHaveLifeBullet : CreateBullet {
 		playposition = player.transform.position;
 
 		//this object transform.position.y ;
-		parabolaX = this.transform.position.x;
-		parabolaY = this.transform.position.y;
 		starty = this.transform.position.y;
 		startx = this.transform.position.y;
-		parabolastate = 1;
+	
+		xSpeed = playposition.x - startx;
 
-		parabolaVerticalAccel = (playposition.x - parabolaX)/100;
 	}
 
 	void Update(){
 		RunningPattern (bulletName);
-		//Debug.Log (parabolaVerticalAccel);
-//		Debug.Log (player.transform.position);
-//		Debug.Log (playposition);
-
-		//bullet destroy;
+	
 		Destroy (this.gameObject, 10);
+		if (this.gameObject.transform.position.y <= 0) {
+			Debug.Log (Time.realtimeSinceStartup);
+		}
 
-//		float t = 0;
-//		t += Time.deltaTime;
-//	
-//
-//		if(t > dat) return;
-//		float x = startx + vx *t;
-//		float y = starty + vy * t- 0.5f * gravity * t* t;
-//
-//		return new Vector2(x,y);
 
 	}
 
@@ -113,15 +99,12 @@ public class UnHaveLifeBullet : CreateBullet {
 		case BulletName.normalbullet: 
 			{
 				this.gameObject.transform.Translate (1*Time.deltaTime*10, 0, 0);
-
-
 				break;
 			}
 
 		case BulletName.guidancebullet: 
 			{
 				
-				//if()
 
 
 
@@ -130,81 +113,21 @@ public class UnHaveLifeBullet : CreateBullet {
 
 		case BulletName.parabolabullet:
 			{
-				//test
-
-
-				pos = new Vector2 (this.gameObject.transform.position.x, this.gameObject.transform.position.y);
-				pos.y = parabolaY;
-				pos.x = parabolaX;
-				gameObject.transform.position = pos;
-
-
-				//parabolaBulletmove ();
-
-
-//				this.gameObject.transform.Translate (player.transform.position, 0);
-				//this.gameObject.transform.Translate (player.transform.position,0);
-				//this.gameObject.transform.Translate (1*Time.deltaTime*10, 0, 0);
+				ySpeed -= gravity * Time.deltaTime;
+				this.gameObject.transform.Translate (new Vector3 (xSpeed*Time.deltaTime*0.333f, ySpeed*Time.deltaTime, 0));
 				break;
 			}
 
 		}
 	}
 
-	void testpara()
-	{
-		float maxy=1;
-		float mhh=1;
-		float dh = playposition.y - starty;
-		float mh = maxy - starty;
-
-		float vy = Mathf.Sqrt(2*gravity*mh);
-
-		float dat = (-2 * vy + Mathf.Sqrt (2 * vy * 2 * vy - 4 * gravity * 2 * dh)) / (2 * gravity);
-		float vx = -(startx - playposition.x) / dat;
 
 
-	}
 
-	//parabolabullet's movepattern;
-	void parabolaBulletmove ()
-	{
-		//positionx moveprocess;
-		parabolaX += parabolaVerticalAccel;
 
-		//positiony moveprocess;
-		gravity -= gravityaccel;
-		parabolaY += gravity;
-		if (parabolaY < starty - 30) {
-			Destroy (this.gameObject);
-		}
-//		switch (parabolastate) 
-//		{
-//		case 1: 
-//			{
-//				gravity -= gravityaccel;
-//				parabolaY += gravity;
-//
-////				if (parabolaY >= starty+100) {
-////					parabolastate = 2;
-////				}
-//				break;
-//			}
-//
-//		case 2: 
-//			{
-//				
-//				parabolaY -= gravity;
-//				gravity += gravityaccel;
-//				break;
-//			}
-//		
-//
-//		}
-	}
 
 	void OnTriggerEnter(Collider coll){
-		Debug.Log(testtime);
+		//Debug.Log(testtime);
 	}
 
 

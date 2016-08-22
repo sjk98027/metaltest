@@ -13,7 +13,7 @@ public class MonsterSetting : MonoBehaviour {
 
 	//Get gameobject search;
 	public GameObject player;
-	public GameObject bullet;
+	//public GameObject bullet;
 
 	//able unable
 	public bool ableMove; // movespeed = 0  or movespeed = casebycase;
