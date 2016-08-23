@@ -76,6 +76,7 @@ public class UnHaveLifeBullet : CreateBullet {
 
 	public void OnCollisionEnter2D(Collision2D coll){
 		if (coll.gameObject.layer == LayerMask.NameToLayer ("player")) {
+			//sR.sprite
 			Destroy (this.gameObject);
 			//damage calculate;
 
@@ -114,7 +115,7 @@ public class UnHaveLifeBullet : CreateBullet {
 		case BulletName.parabolabullet:
 			{
 				ySpeed -= gravity * Time.deltaTime;
-				this.gameObject.transform.Translate (new Vector3 (xSpeed*Time.deltaTime*0.333f, ySpeed*Time.deltaTime, 0));
+				this.gameObject.transform.Translate (new Vector3 (xSpeed*Time.deltaTime*0.333f, -ySpeed*Time.deltaTime, 0));
 				break;
 			}
 

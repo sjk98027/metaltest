@@ -27,11 +27,15 @@ public class NormalSolder : MonsterSetting {
 
 
 	//attack type distance 
-	int fireIntheHoleDistance=20;
-	int sitDownFireIntheHoleDistance = 10;
-	int jumpKnipeAttackDistance = 5;
+	int fireIntheHoleDistance=8;
+	int sitDownFireIntheHoleDistance = 6;
+	int jumpKnipeAttackDistance = 4;
 	int knipeAttackDistance = 2;
 	float attackCyle = 0;
+
+	float jumpHigh = 6;
+
+
 	public float testvalue;
 	//bullet instantiate, knipe wear timing == animation event process;
 
@@ -57,7 +61,7 @@ public class NormalSolder : MonsterSetting {
 		MonsterSetting setting = gameObject.GetComponentInParent<MonsterSetting> ();
 		attacktype = 0;
 		sR = gameObject.GetComponent<SpriteRenderer> ();
-		playerRealizeDistance = 40;
+		playerRealizeDistance = 10;
 
 		//test
 		monsterAni = gameObject.GetComponent<Animator> ();
@@ -84,11 +88,13 @@ public class NormalSolder : MonsterSetting {
 			turnCheckDistance = distanceVector2.x;
 			//testvalue = playerToMonsterDistance;
 
-			if (turnCheckDistance >= 0) {
-				spinCheck = true;
-			}
-			if (turnCheckDistance < 0) {
-				spinCheck = false;
+			if(runCheck){
+				if (turnCheckDistance >= 0) {
+					spinCheck = true;
+				}
+				if (turnCheckDistance < 0) {
+					spinCheck = false;
+				}
 			}
 			TurnMonster ();
 
@@ -96,17 +102,6 @@ public class NormalSolder : MonsterSetting {
 			if (playerToMonsterDistance <= playerRealizeDistance &&	!scareCheck) {
 				Pattern (monsterNormalStateName.Scare);
 				}
-
-
-
-
-
-
-
-
-
-
-
 
 			//pattern Condition;
 			else if (playerToMonsterDistance < playerRealizeDistance && scareCheck ) 
@@ -137,27 +132,40 @@ public class NormalSolder : MonsterSetting {
 					monsterAni.SetBool ("Run", false);
 
 					if (playerToMonsterDistance < knipeAttackDistance) {
-						if (attackCyle >= 1.5) {
+						if (attackCyle >= 2) {
 							Pattern (monsterNormalStateName.KA);
 						}
 					} else if (playerToMonsterDistance <= jumpKnipeAttackDistance & playerToMonsterDistance > knipeAttackDistance) {
-						if (attackCyle >= 1.5) {
+						if (attackCyle >= 2) {
 							Pattern (monsterNormalStateName.JKA);
+
 						}	
 					} else if (playerToMonsterDistance <= sitDownFireIntheHoleDistance & playerToMonsterDistance > jumpKnipeAttackDistance) {
-						if (attackCyle >= 1.5) {
+						if (attackCyle >= 3) {
 							Pattern (monsterNormalStateName.SFIH);
 						}
 					} else if (playerToMonsterDistance > sitDownFireIntheHoleDistance) {
-						if (attackCyle >= 1.5) {
+						if (attackCyle >= 3) {
 							Pattern (monsterNormalStateName.FIH);
 						}
 					}
-
 				}
 
+
+			if (monsterAni.GetCurrentAnimatorStateInfo (0).shortNameHash == Animator.StringToHash ("NormalSolderJumpKnikeAttack")) {
+				
+				//jumpHigh -= gravity * Time.deltaTime;
+				if (sR.flipX ) {
+					this.gameObject.transform.Translate (new Vector2 (-5 * Time.deltaTime, jumpHigh * Time.deltaTime));
+				} else if (!sR.flipX ) {
+					this.gameObject.transform.Translate (new Vector2 (5 * Time.deltaTime, jumpHigh * Time.deltaTime));
+				}
+			}
+				
+
+
 				//monster death Condition;
-				if (playerRealizeDistance >= 100) {
+				if (playerRealizeDistance >= 20) {
 					Pattern (monsterNormalStateName.Death);
 				}
 
@@ -167,6 +175,11 @@ public class NormalSolder : MonsterSetting {
 			Pattern (monsterNormalStateName.Death);
 		}
 
+	}
+
+	public void SRFlipCheck()
+	{
+		
 	}
 
 	public void TurnMonster()
